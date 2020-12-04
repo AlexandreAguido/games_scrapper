@@ -65,6 +65,7 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    'game_scrapper.pipelines.IgdbPipeline': 300,
    'game_scrapper.pipelines.StoreGamePipeline': 900,
+   'game_scrapper.pipelines.ScrappedItemPipeline': 600
    
 }
 

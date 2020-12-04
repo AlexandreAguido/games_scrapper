@@ -4,7 +4,7 @@ import requests
 import json
 from datetime import datetime, timedelta
 from os.path import abspath, join, split
-from dotenv import load_dotenv
+from game_scrapper.utils import get_db_connection, load_env
 from game_scrapper.items import IgdbItem
 
 
@@ -13,14 +13,12 @@ class IgdbSpyder(scrapy.Spider):
     client_id = ''
     token = ''
     offset = 0
-    limit = 100
+    limit = 400
 
-    def __init__(self, year=2020, month=8):
+    def __init__(self, year=2020, month=11):
         month = int(month)
         year = int(year)
-        absdir = split(abspath(__file__))[0]
-        env_file = (join(absdir, '../../.env'))
-        load_dotenv(dotenv_path=env_file)
+        load_env()
         self.token = self._get_token()
         if not self.token:
             return
@@ -39,7 +37,9 @@ class IgdbSpyder(scrapy.Spider):
             },
             'body': f"""
             fields name, cover.image_id, platforms.name, first_release_date, genres.name, screenshots.image_id, storyline, summary;
-            where status < 6 & platforms = (12, 48, 49, 130, 167, 169) & first_release_date >= {self.release_start} & first_release_date < {self.release_end};
+            sort first_release_date desc;
+            where (status = null | status !=6) & platforms = (6, 12, 48, 49, 130, 167, 169) & 
+            first_release_date >= {self.release_start} & first_release_date < {self.release_end};
             limit {self.limit}; offset {self.offset};
             """
         }

@@ -15,3 +15,9 @@ class IgdbItem(scrapy.Item):
     screenshots = scrapy.Field()
     storyline = scrapy.Field()
     summary = scrapy.Field()
+
+class ScrappedItem(scrapy.Item):
+    price = scrapy.Field()
+    game_console_id = scrapy.Field()
+    url = scrapy.Field()
+    product_id = scrapy.Field()
