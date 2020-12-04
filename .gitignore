@@ -3,3 +3,5 @@ venv
 **__pycache__
 **.json
 **.jl
+build
+project.egg-info
