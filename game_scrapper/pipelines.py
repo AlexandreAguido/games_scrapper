@@ -7,7 +7,6 @@
 # useful for handling different item types with a single interface
 import logging
 import os
-from os.path import split, abspath, join
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 from time import time

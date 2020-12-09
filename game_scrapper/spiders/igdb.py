@@ -3,7 +3,6 @@ import os
 import requests
 import json
 from datetime import datetime, timedelta
-from os.path import abspath, join, split
 from game_scrapper.utils import get_db_connection, load_env
 from game_scrapper.items import IgdbItem
 
