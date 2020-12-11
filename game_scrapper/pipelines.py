@@ -142,6 +142,7 @@ class ScrappedItemPipeline:
             raise DropItem('invalid price value for {} price'.format(url))
 
         self._save_or_update(adapter, spider)
+        return item
 
     def _save_or_update(self, item, spider):
         price = item.get('price')

@@ -7,7 +7,7 @@ from game_scrapper.items import ScrappedItem
 
 class KabumSpider(BaseSpyder):
     name='kabum'
-    console_slugs = ["'ps4'", "'ps5'"]
+    console_slugs = ["'ps4'", "'ps5', 'xbox one'"]
     search_url = 'https://www.kabum.com.br/cgi-local/site/listagem/listagem.cgi?string={}'
 
     def __init__(self, method='discover'):
