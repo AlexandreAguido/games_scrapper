@@ -128,6 +128,7 @@ class StoreGamePipeline:
                                 (game_id, cat_id))
         self.connection.commit()
         logging.log(logging.INFO, f'INSERTED {name} into DATABASE')
+        return item
 
 
 class ScrappedItemPipeline:
@@ -154,8 +155,11 @@ class ScrappedItemPipeline:
             query = """ INSERT INTO Game_Console_Site(fk_GameConsole_id, fk_Site_id, price, url)
             VALUES (%s, (Select id from Site where name = %s), %s, %s)
             """
-            self.cursor.execute(query, (game_console_id, site, price, url))
-            self.connection.commit()
+            try:
+                self.cursor.execute(query, (game_console_id, site, price, url))
+                self.connection.commit()
+            except IntegrityError:
+                pass
             return
 
         # update price

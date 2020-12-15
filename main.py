@@ -8,6 +8,7 @@ def main():
     if not method or method not in ('discover', 'update'): return
     process = CrawlerProcess(get_project_settings())
     process.crawl('kabum', method=method)
+    process.crawl('americanas', method=method)
     process.start()
 
 if __name__ == '__main__':

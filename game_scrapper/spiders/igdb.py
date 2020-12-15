@@ -22,9 +22,9 @@ class IgdbSpyder(scrapy.Spider):
         if not self.token:
             return
         self.release_start = int(
-            datetime(year, month, 1, 0, 0).timestamp() * 1000 ) 
+            datetime(year, month, 1, 0, 0).timestamp()) 
         self.release_end = int(
-            datetime(year + (month + 1) // 13, (month % 12) + 1, 1, 0, 0).timestamp() * 1000) 
+            datetime(year + (month + 1) // 13, (month % 12) + 1, 1, 0, 0).timestamp()) 
 
     def _get_request_params(self):
         return {
@@ -37,7 +37,7 @@ class IgdbSpyder(scrapy.Spider):
             'body': f"""
             fields name, cover.image_id, platforms.name, first_release_date, genres.name, screenshots.image_id, storyline, summary;
             sort first_release_date desc;
-            where (status = null | status !=6) & platforms = (12, 48, 49, 130, 167, 169) & 
+            where (status = null | status !=6) & platforms = (12, 48, 49, 130, 167, 169) &
             first_release_date != null & first_release_date >= {self.release_start} & first_release_date < {self.release_end};
             limit {self.limit}; offset {self.offset};
             """
