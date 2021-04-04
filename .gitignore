@@ -5,3 +5,4 @@ venv
 **.jl
 build
 project.egg-info
+*.sh

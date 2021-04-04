@@ -44,6 +44,9 @@ class AmericanasSpider(BaseSpyder):
             return
         data = json.loads(game_info.groups()[0].replace('undefined', 'null'))['pages']
         search_id = list(data.keys())[0]
+        # item not found
+        if 'queries' not in data[search_id].keys(): return
+
         search_result = data[search_id]['queries']['pageSearch']['result']['search']
         if search_result['total'] == 0: return  
         product = search_result['products'][0]['product']
