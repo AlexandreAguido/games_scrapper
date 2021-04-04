@@ -29,10 +29,8 @@ class KabumSpider(BaseSpyder):
         return requests
 
     def parse(self, response, game_console_id, product_id):
-        game_info = response.css('script')[12].re_first(r'listagemDados = (\[.*\])')
-        if game_info == None:
-            game_info = response.css('script')[19].re_first(r'listagemDados = (\[.*\])')
-        game_obj = json.loads(game_info)
+        game_info = re.search(r'listagemDados = (\[.*\])', response.text)
+        game_obj = json.loads(game_info.groups()[0])
         if not game_obj: return
         price = float(game_obj[0]['preco_desconto'])
         url = 'https://kabum.com.br' + game_obj[0]['link_descricao']
